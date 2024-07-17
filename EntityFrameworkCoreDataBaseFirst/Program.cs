@@ -1,11 +1,22 @@
+using BussinessLogicLayer.Interface;
+using BussinessLogicLayer.Service;
+using Microsoft.EntityFrameworkCore;
+using RepositoryLayer.Context;
+using RepositoryLayer.Entity;
+using RepositoryLayer.Interface;
+using RepositoryLayer.Repository;
+
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-
+// Add services to the container;
 builder.Services.AddControllers();
+builder.Services.AddScoped<DbContext, UserContext>();
+builder.Services.AddTransient<IUserBLL, UserBLL>();
+builder.Services.AddTransient<IUserDAL, UserDAL>();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
 
 var app = builder.Build();
 
